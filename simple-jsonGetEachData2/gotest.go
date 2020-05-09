@@ -43,7 +43,7 @@ func getAllData() {
 
 func getSimpleJSON(filePath string) (j *simplejson.Json, err error) {
 
-	bytes, err := ioutil.ReadFile(filePath)
+	bytes, err := readFile(filePath)
 	var rawData *simplejson.Json
 	if err != nil {
 		fmt.Println(err)

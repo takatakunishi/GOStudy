@@ -8,6 +8,7 @@ import (
 
 	"github.com/bitly/go-simplejson"
 	"github.com/mitchellh/mapstructure"
+	"github.com/rs/xid"
 )
 
 func main() {
@@ -46,7 +47,8 @@ func getAllData() {
 
 	var body = []byte(sends)
 
-	CreatedWorkTag := "WorkTag6"
+	var CreatedWorkTag string = (xid.New()).String()
+	fmt.Println(CreatedWorkTag)
 	DesignationUserID := "Id"
 
 	var sendData map[string]interface{}
@@ -61,6 +63,22 @@ func getAllData() {
 
 	data, err := simplejson.NewJson(bytes)
 
+	_, tof := data.Get(DesignationUserID).CheckGet(CreatedWorkTag)
+
+	if tof {
+		var i = 0
+		for {
+			if i < 5 && tof {
+				_, tof = data.CheckGet(CreatedWorkTag)
+				if i == 4 {
+					fmt.Println("over")
+				}
+			}
+			i++
+		}
+	} else {
+		fmt.Println("ok")
+	}
 	data.Get(DesignationUserID).SetPath([]string{CreatedWorkTag}, sendData)
 
 	works := make([]ID, 0)
