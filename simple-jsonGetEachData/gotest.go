@@ -21,6 +21,8 @@ func readFile(filename string) ([]byte, error) {
 
 func getAllData() {
 	filePath := "works3.json"
+	request := "absakjfd"
+	body := []byte(request)
 
 	bytes, err := ioutil.ReadFile(filePath)
 	if err != nil {
@@ -29,27 +31,14 @@ func getAllData() {
 
 	rawData, err := simplejson.NewJson(bytes)
 
-	data := rawData.Get("Id")
+	data := rawData.GetPath("Id", string(body))
 
-	works := make([]ID, 0)
-	for _, v := range data.MustMap() {
-		fake, _ := json.Marshal(v)
-		if err != nil {
-			fmt.Println(err)
-			break
-		}
-		var box ID
-		err = json.Unmarshal(fake, &box)
-		if err != nil {
-			fmt.Println(err)
-			break
-		}
-		works = append(works, box)
+	var result ID
+
+	b, err := data.MarshalJSON()
+	if err := json.Unmarshal(b, &result); err != nil {
+		fmt.Println(err)
 	}
-
-	var result Data
-
-	result.Id = works
 
 	fmt.Printf("%+v", result)
 }
