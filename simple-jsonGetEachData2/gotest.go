@@ -20,16 +20,14 @@ func readFile(filename string) ([]byte, error) {
 }
 
 func getAllData() {
-	filePath := "works3.json"
 	request := "absakjfd"
+	filePath := "works3.json"
 	body := []byte(request)
 
-	bytes, err := ioutil.ReadFile(filePath)
+	rawData, err := getSimpleJSON(filePath)
 	if err != nil {
 		fmt.Println(err)
 	}
-
-	rawData, err := simplejson.NewJson(bytes)
 
 	data := rawData.GetPath("Id", string(body))
 
@@ -41,6 +39,20 @@ func getAllData() {
 	}
 
 	fmt.Printf("%+v", result)
+}
+
+func getSimpleJSON(filePath string) (j *simplejson.Json, err error) {
+
+	bytes, err := ioutil.ReadFile(filePath)
+	var rawData *simplejson.Json
+	if err != nil {
+		fmt.Println(err)
+		return rawData, err
+	}
+
+	rawData, err = simplejson.NewJson(bytes)
+
+	return rawData, err
 }
 
 func writeFile(filename string, bytes []byte) (err error) {
