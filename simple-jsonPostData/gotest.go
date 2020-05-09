@@ -22,8 +22,8 @@ func readFile(filename string) ([]byte, error) {
 func getAllData() {
 	filePath := "works3.json"
 
-	raws := `{
-			"WorkTag": "x",
+	sends := `{
+			"WorkTag": "yaaaaashdhsadjasfas",
 			"Title": "The girl of the night",
 			"Auth": "mmmaker",
 			"Corporator": [],
@@ -44,11 +44,13 @@ func getAllData() {
 			}
 		}`
 
-	WorkTag := "WorkTag4"
-	UserID := "Id"
+	var body = []byte(sends)
+
+	CreatedWorkTag := "WorkTag6"
+	DesignationUserID := "Id"
 
 	var sendData map[string]interface{}
-	if err := json.Unmarshal([]byte(raws), &sendData); err != nil {
+	if err := json.Unmarshal(body, &sendData); err != nil {
 		fmt.Println(59, err)
 	}
 
@@ -57,11 +59,9 @@ func getAllData() {
 		fmt.Println(err)
 	}
 
-	RawData, err := simplejson.NewJson(bytes)
+	data, err := simplejson.NewJson(bytes)
 
-	data := RawData.Get(UserID)
-
-	data.SetPath([]string{WorkTag}, sendData)
+	data.Get(DesignationUserID).SetPath([]string{CreatedWorkTag}, sendData)
 
 	works := make([]ID, 0)
 	for _, v := range data.MustMap() {
@@ -74,19 +74,13 @@ func getAllData() {
 		}
 		works = append(works, box)
 	}
-	w, err := os.Create("./result.json")
-	// defer w.Close()
-	// o, _ := js.MarshalJSON()
-	// o, _ := js.Encode()
+
 	o, _ := data.EncodePretty()
-	//oはバイナリ
-	// fmt.Printf("%+v\n", o)
-	// o, err := json.Marshal(works)
-	w.Write(o)
-	// err = writeFile("works2.json", o)
-	// if err != nil {
-	// 	fmt.Println(err)
-	// }
+	err = writeFile(filePath, o)
+	if err != nil {
+		fmt.Println(err)
+	}
+
 }
 
 func writeFile(filename string, bytes []byte) (err error) {
