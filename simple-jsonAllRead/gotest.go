@@ -47,7 +47,11 @@ func getAllData() {
 		works = append(works, box)
 	}
 
-	fmt.Printf("xxx %+v", works)
+	var result Data
+
+	result.Id = works
+
+	fmt.Printf("%+v", result)
 }
 
 func writeFile(filename string, bytes []byte) (err error) {
@@ -88,6 +92,7 @@ func makeJSON(bytes []byte, body []byte) (ids Data, err error) {
 	}
 
 	Datas.Id = works
+
 	return Datas, nil
 }
 
