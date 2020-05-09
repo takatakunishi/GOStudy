@@ -1,0 +1,33 @@
+{
+  "Id": {
+    "WorkId": {
+      "Auth": "userA",
+      "Title": "title1"
+    },
+    "WorkId2": {
+      "Auth": "userA",
+      "Title": "title1"
+    },
+    "WorkId3": {
+      "Auth": "mmmaker",
+      "Corporator": [],
+      "Date": "20190922",
+      "Description": "皆様の目の片隅にでも止まっていただければ幸いです",
+      "Likes": {
+        "Amount": 3,
+        "Users": [
+          "userIdx",
+          "userIdy"
+        ]
+      },
+      "Tags": [
+        "オリジナル"
+      ],
+      "Title": "The girl of the night",
+      "Url": [
+        "https://pbs.twimg.com/media/EFEV9KxVAAANguo?format=jpg\u0026name=small"
+      ],
+      "WorkTag": "absakjfd"
+    }
+  }
+}

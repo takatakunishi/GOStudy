@@ -1,0 +1,12 @@
+{
+    "Id": {
+        "WorkId": {
+            "Title": "title1",
+            "Auth": "userA"
+        },
+        "WorkId2": {
+            "Title": "title1",
+            "Auth": "userA"
+        }
+    }
+}
